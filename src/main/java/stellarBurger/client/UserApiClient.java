@@ -3,6 +3,7 @@ package stellarBurger.client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import stellarBurger.model.User;
+import stellarBurger.model.UserCredentials;
 
 import static io.restassured.RestAssured.given;
 
@@ -20,6 +21,15 @@ public class UserApiClient {
                         .header("Content-type", JSON)
                         .body(user)
                         .post(BASE_URL + REGISTER_USER_PATH)
+                        .then();
+        }
+
+        @Step("Авторизация пользователя")
+        public ValidatableResponse loginUser(UserCredentials credentials){
+                return given()
+                        .header("Content-type", JSON)
+                        .body(credentials)
+                        .post(BASE_URL + AUTH_USER_PATH)
                         .then();
         }
 
