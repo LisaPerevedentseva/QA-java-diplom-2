@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class RegisterUserTest {
 
 
     @Test
+    @DisplayName("Регистрация нового пользователя")
     public void successRegisterUserTest(){
 
         ValidatableResponse response = userApiClient.registerUser(userSteps.createCorrectUser());
@@ -38,6 +40,7 @@ public class RegisterUserTest {
     }
 
     @Test
+    @DisplayName("Регистрация существующего пользователя")
     public void failRegisterExistingUserTest(){
         User user = userSteps.createCorrectUser();
         authToken = userSteps.getAccessToken(userApiClient.registerUser(user));

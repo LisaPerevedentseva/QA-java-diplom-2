@@ -1,3 +1,4 @@
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
@@ -37,6 +38,7 @@ public class ParameterizedRegisterUserTest {
 
    }
        @Test
+       @DisplayName("Регистрация с незаполненным обязательным полем")
        public void failRegisterWithoutFieldTest(){
            ValidatableResponse response = userApiClient.registerUser(user);
            response.statusCode(expectedStatusCode)
