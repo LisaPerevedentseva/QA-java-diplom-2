@@ -34,7 +34,6 @@ public class AuthorizationUserTest {
         }
     }
 
-    // успешная авторизация
     @Test
     @DisplayName("Авторизация с корректными кредами")
     public void successLoginTest(){
@@ -43,7 +42,6 @@ public class AuthorizationUserTest {
                 .and().assertThat().body("success", equalTo(true));
     }
 
-    // авторизация с некорректным паролем
     @Test
     @DisplayName("Авторизация с некорректным паролем")
     public void failLoginWithIncorrectPasswordTest(){
@@ -54,7 +52,6 @@ public class AuthorizationUserTest {
                 .and().assertThat().body("message", equalTo("email or password are incorrect"));
     }
 
-    // авторизация с некорректным логином
     @Test
     @DisplayName("Авторизация с некорректным логином")
     public void failLoginWithIncorrectLoginTest(){

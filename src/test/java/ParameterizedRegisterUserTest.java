@@ -32,7 +32,8 @@ public class ParameterizedRegisterUserTest {
        return new Object[][]{
                {new User("", RandomStringUtils.randomAlphanumeric(6), RandomStringUtils.randomAlphabetic(3)), HTTP_FORBIDDEN, "Email, password and name are required fields"},
                {new User(RandomStringUtils.randomAlphanumeric(3) + "@yandex.ru", "", RandomStringUtils.randomAlphabetic(3)), HTTP_FORBIDDEN, "Email, password and name are required fields"},
-               {new User(RandomStringUtils.randomAlphanumeric(3) + "@yandex.ru", RandomStringUtils.randomAlphanumeric(6), ""), HTTP_FORBIDDEN, "Email, password and name are required fields"}
+               {new User(RandomStringUtils.randomAlphanumeric(3) + "@yandex.ru", RandomStringUtils.randomAlphanumeric(6), ""), HTTP_FORBIDDEN, "Email, password and name are required fields"},
+               {new User(null, null, null), HTTP_FORBIDDEN, "Email, password and name are required fields"}
 
        };
 

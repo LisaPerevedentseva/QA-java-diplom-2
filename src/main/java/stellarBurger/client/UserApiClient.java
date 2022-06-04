@@ -14,6 +14,7 @@ public class UserApiClient {
         private final String REGISTER_USER_PATH = "/api/auth/register";
         private final String AUTH_USER_PATH = "/api/auth/login";
         private final String DELETE_USER_PATH = "/api/auth/user";
+        private final String EDIT_USER_PATH = "/api/auth/user";
 
         @Step ("Регистрация нового пользователя")
         public ValidatableResponse registerUser(User user){
@@ -30,6 +31,15 @@ public class UserApiClient {
                         .header("Content-type", JSON)
                         .body(credentials)
                         .post(BASE_URL + AUTH_USER_PATH)
+                        .then();
+        }
+
+        @Step("Изменение данных пользователя")
+        public ValidatableResponse editUser (User user, String authToken){
+                return given()
+                        .header("Authorization", authToken)
+                        .body(user)
+                        .patch(BASE_URL + EDIT_USER_PATH)
                         .then();
         }
 
