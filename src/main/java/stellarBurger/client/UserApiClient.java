@@ -7,10 +7,9 @@ import stellarBurger.model.UserCredentials;
 
 import static io.restassured.RestAssured.given;
 
-public class UserApiClient {
+public class UserApiClient extends BaseSpec {
 
         private final String JSON = "application/json";
-        private final String BASE_URL = "https://stellarburgers.nomoreparties.site";
         private final String REGISTER_USER_PATH = "/api/auth/register";
         private final String AUTH_USER_PATH = "/api/auth/login";
         private final String DELETE_USER_PATH = "/api/auth/user";
@@ -19,35 +18,39 @@ public class UserApiClient {
         @Step ("Регистрация нового пользователя")
         public ValidatableResponse registerUser(User user){
                 return given()
+                        .spec(getBaseUri())
                         .header("Content-type", JSON)
                         .body(user)
-                        .post(BASE_URL + REGISTER_USER_PATH)
+                        .post(REGISTER_USER_PATH)
                         .then();
         }
 
         @Step("Авторизация пользователя")
         public ValidatableResponse loginUser(UserCredentials credentials){
                 return given()
+                        .spec(getBaseUri())
                         .header("Content-type", JSON)
                         .body(credentials)
-                        .post(BASE_URL + AUTH_USER_PATH)
+                        .post(AUTH_USER_PATH)
                         .then();
         }
 
         @Step("Изменение данных пользователя")
         public ValidatableResponse editUser (User user, String authToken){
                 return given()
+                        .spec(getBaseUri())
                         .header("Authorization", authToken)
                         .body(user)
-                        .patch(BASE_URL + EDIT_USER_PATH)
+                        .patch(EDIT_USER_PATH)
                         .then();
         }
 
         @Step ("Удаление пользователя")
         public ValidatableResponse deleteUser (String authToken){
                 return given()
+                        .spec(getBaseUri())
                         .header("Authorization", authToken)
-                        .delete(BASE_URL + DELETE_USER_PATH)
+                        .delete(DELETE_USER_PATH)
                         .then();
 
         }
